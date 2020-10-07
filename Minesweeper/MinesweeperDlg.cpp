@@ -154,7 +154,6 @@ void CMinesweeperDlg::OnPaint()
 	{
 		CDialogEx::OnPaint();
 
-
 		CDC* dc = GetDC();
 
 		CDC dc_mem;

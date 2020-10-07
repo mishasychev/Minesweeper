@@ -14,8 +14,10 @@ public:
 	CSettingsDlg(CField* field, CWnd* pParent = nullptr);   // standard constructor
 
 	afx_msg void OnBnClickedButtonDefault();
-	afx_msg void OnEnUpdateEditCountOfmines();
+	afx_msg void OnBnClickedOk();
 
+	afx_msg void OnEnUpdateEditCountOfmines();
+	afx_msg void OnEnUpdateEditCagesize();
 
 	__forceinline constexpr uint32_t GetRows() const { return rows_; }
 	__forceinline constexpr uint32_t GetColumns() const { return columns_; }
@@ -40,6 +42,4 @@ private:
 	uint32_t cageSize_;
 
 	CField* currentField_;
-public:
-	afx_msg void OnBnClickedOk();
 };

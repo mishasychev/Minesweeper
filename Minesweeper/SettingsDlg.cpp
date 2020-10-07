@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(CSettingsDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_DEFAULT, &CSettingsDlg::OnBnClickedButtonDefault)
 	ON_EN_UPDATE(IDC_EDIT_COUNTOFMINES, &CSettingsDlg::OnEnUpdateEditCountOfmines)
 	ON_BN_CLICKED(IDOK, &CSettingsDlg::OnBnClickedOk)
+	ON_EN_UPDATE(IDC_EDIT_CAGESIZE, &CSettingsDlg::OnEnUpdateEditCagesize)
 END_MESSAGE_MAP()
 
 void CSettingsDlg::OnBnClickedButtonDefault()
@@ -85,4 +86,20 @@ void CSettingsDlg::OnBnClickedOk()
 	}
 
 	CDialogEx::OnOK();
+}
+
+
+void CSettingsDlg::OnEnUpdateEditCagesize()
+{
+	uint32_t oldCageSize = cageSize_;
+	UpdateData(TRUE);
+
+	CRect wndRect;
+	GetDesktopWindow()->GetWindowRect(wndRect);
+	if ((rows_ * cageSize_ + 59) > static_cast<uint32_t>(wndRect.bottom) || (columns_ * cageSize_ + 16) > static_cast<uint32_t>(wndRect.right))
+	{
+		cageSize_ = oldCageSize;
+		UpdateData(FALSE);
+		MessageBox(TEXT("New value over the limit"), TEXT("Error"), MB_ICONERROR | MB_OK);
+	}
 }
